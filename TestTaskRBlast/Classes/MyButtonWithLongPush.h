@@ -16,11 +16,11 @@ namespace myGUI
 	protected:
 		std::function<void()> m_longPushReleaseCallback = nullptr;
 
-		virtual void onMousePress(cocos2d::EventMouse* mouseEv)			override;
-		virtual void onMouseRelease(cocos2d::EventMouse* mouseEv)		override;
-		virtual void onMouseEnter(cocos2d::EventMouse* mouseEv)			override;
-		virtual void onMouseLeftExpandZone(cocos2d::EventMouse* mouseEv)override;
-		virtual void update(float delta)								override;
+		void onMousePress(cocos2d::EventMouse* mouseEv)			override;
+		void onMouseRelease(cocos2d::EventMouse* mouseEv)		override;
+		void onMouseEnter(cocos2d::EventMouse* mouseEv)			override;
+		void onMouseLeftExpandZone(cocos2d::EventMouse* mouseEv)override;
+		void update(float delta)								override;
 
 		
 

@@ -33,7 +33,7 @@ namespace myGUI
 
     void MyButtonWithLongPush::onMousePress(cocos2d::EventMouse* mouseEv)
     {
-        MyButton::onMousePress(mouseEv); auto h = std::chrono::steady_clock::now();
+        MyButton::onMousePress(mouseEv); 
 
         if (m_currentState == ButtonState::Pushed)
             m_lastPushedTime = std::chrono::steady_clock::now();

@@ -5,7 +5,7 @@ USING_NS_CC;
 namespace myGUI
 {
 
-    MyButton* MyButton::create(cocos2d::Size contentSize, cocos2d::Node* idleSprite, cocos2d::Node* pushedSprite, cocos2d::Node* dragOutSprite)
+    MyButton* MyButton::create(const cocos2d::Size& contentSize, cocos2d::Node* idleSprite, cocos2d::Node* pushedSprite, cocos2d::Node* dragOutSprite)
     {
         MyButton* ret = new (std::nothrow) MyButton();
         if (ret && ret->init(contentSize, idleSprite, pushedSprite, dragOutSprite))
@@ -17,7 +17,7 @@ namespace myGUI
         return nullptr;
     }
 
-    bool MyButton::init(cocos2d::Size contentSize, cocos2d::Node* idleSprite, cocos2d::Node* pushedSprite, cocos2d::Node* dragOutSprite)
+    bool MyButton::init(const cocos2d::Size& contentSize, cocos2d::Node* idleSprite, cocos2d::Node* pushedSprite, cocos2d::Node* dragOutSprite)
     {
         this->setContentSize(contentSize);
         this->setAnchorPoint({ 0.5f, 0.5f });
@@ -80,11 +80,11 @@ namespace myGUI
         m_currentState = state;
     }
    
-    bool myGUI::MyButton::isMouseOnZone(cocos2d::Point cursorPos, float zoneOffset)
+    bool myGUI::MyButton::isMouseOnZone(const cocos2d::Point& cursorPos, float zoneOffset)
     {
-        auto boundBox = getBoundingBox();
+        const auto boundBox = getBoundingBox();
 
-        Rect r{ boundBox.origin.x - zoneOffset * _scaleX, boundBox.origin.y - zoneOffset * _scaleZ,
+        const Rect r{ boundBox.origin.x - zoneOffset * _scaleX, boundBox.origin.y - zoneOffset * _scaleZ,
                 boundBox.size.width + zoneOffset * 2 * _scaleX, boundBox.size.height + zoneOffset * 2 * _scaleY };
 
         return r.containsPoint({ cursorPos.x, cursorPos.y });

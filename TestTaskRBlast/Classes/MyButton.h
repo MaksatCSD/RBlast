@@ -18,15 +18,15 @@ namespace myGUI
 			DragOut
 		};
 
-		static MyButton* create(cocos2d::Size contentSize, cocos2d::Node* idleSprite, cocos2d::Node* pushedSprite, cocos2d::Node* dragOutSprite);
-		bool init(cocos2d::Size contentSize, cocos2d::Node* idleSprite, cocos2d::Node* pushedSprite, cocos2d::Node* dragOutSprite);
+		static MyButton* create(const cocos2d::Size& contentSize, cocos2d::Node* idleSprite, cocos2d::Node* pushedSprite, cocos2d::Node* dragOutSprite);
+		bool init(const cocos2d::Size& contentSize, cocos2d::Node* idleSprite, cocos2d::Node* pushedSprite, cocos2d::Node* dragOutSprite);
 		void bindChildToState(cocos2d::Node*, ButtonState bs);
 		
 		void setExpandZoneOffset(float offset);
 		void setSafeZoneOffset(float offset);
-		void setReleaseCallback(std::function<void()> func) { m_releaseCallback = func; };
+		void setReleaseCallback(const std::function<void()>& func) { m_releaseCallback = func; };
 
-		ButtonState getCurrentButtonState() { return m_currentState; };
+		ButtonState getCurrentButtonState() const { return m_currentState; };
 
 	protected:
 		float m_expandZoneOffset		= 10.f;					// отступ от границ contentSize
@@ -39,7 +39,7 @@ namespace myGUI
 
 
 		void setState(ButtonState);
-		bool isMouseOnZone(cocos2d::Point cursorPos, float zoneOffset = 0.f);
+		bool isMouseOnZone(const cocos2d::Point& cursorPos, float zoneOffset = 0.f);
 
 
 		virtual void onMousePress(cocos2d::EventMouse* mouseEv);
