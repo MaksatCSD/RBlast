@@ -88,6 +88,10 @@ bool HelloWorld::init()
     // ДЕМОНСТРАЦИОНННАЯ СЦЕНА
     //------------------------------
 
+    auto thenode = cocos2d::Node::create(); 
+    this->addChild(thenode);
+    thenode->setScale(0.7);
+
     // надпись для демонстрации приема событий: кнопка-отправитель, состояние кнопки на момент отправления
     auto eventDemoLabel = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
     if (eventDemoLabel == nullptr)
@@ -153,7 +157,7 @@ bool HelloWorld::init()
     auto dragoutLabel = Label::createWithTTF("Dragout", "fonts/Marker Felt.ttf", 18);   dragoutLabel->setPosition(40, 15);
 
     auto mb = myGUI::MyButton::create({ 80 , 30 }, idleSprite, pushedSprite, dragOutSprite);
-    this->addChild(mb);
+    thenode->addChild(mb);
 
     mb->setExpandZoneOffset(10);
     mb->setSafeZoneOffset(20);
@@ -162,12 +166,14 @@ bool HelloWorld::init()
     mb->addChild(dragoutLabel); mb->bindChildToState(dragoutLabel, myGUI::MyButton::ButtonState::DragOut);
     
     // назначение коллбэка отпускания
-    mb->setReleaseCallback([callbackDemoLabel]()
+    mb->setReleaseCallback([callbackDemoLabel, thenode]()
         {
             if (callbackDemoLabel->isVisible())
                 callbackDemoLabel->setVisible(false);
             else
                 callbackDemoLabel->setVisible(true);
+
+            thenode->setScale(1);
         });
 
     mb->setPosition(Vec2(visibleSize.width / 2 + origin.x - 100, visibleSize.height / 2 + origin.y));
@@ -233,7 +239,9 @@ bool HelloWorld::init()
     auto longPressLabel2 = Label::createWithTTF("PushedLong", "fonts/Marker Felt.ttf", 18); longPressLabel2->setPosition(40, 15);
 
     auto mb2 = myGUI::MyButtonWithLongPush::create({ 80 , 30 }, idleSprite2, pushedSprite2, dragOutSprite2, pushedLongSprite2);
-    this->addChild(mb2);
+    //this->addChild(mb2);
+    thenode->addChild(mb2);
+
     mb2->setExpandZoneOffset(10);
     mb2->setSafeZoneOffset(20);
     mb2->addChild(idleLabel2);    mb2->bindChildToState(idleLabel2, myGUI::MyButton::ButtonState::Idle);
@@ -242,12 +250,14 @@ bool HelloWorld::init()
     mb2->addChild(longPressLabel2); mb2->bindChildToState(longPressLabel2, myGUI::MyButton::ButtonState::PushedLong);
 
     // назначение коллбэка отпускания после длинного нажатия
-    mb2->setLongPushReleaseCallback([pushedLongCallbackDemoLabel]()
+    mb2->setLongPushReleaseCallback([pushedLongCallbackDemoLabel, thenode]()
         {
             if (pushedLongCallbackDemoLabel->isVisible())
                 pushedLongCallbackDemoLabel->setVisible(false);
             else
                 pushedLongCallbackDemoLabel->setVisible(true);
+
+            thenode->setScale(0.5);
         });
 
     mb2->setPosition(Vec2(visibleSize.width / 2 + origin.x + 100, visibleSize.height / 2 + origin.y));

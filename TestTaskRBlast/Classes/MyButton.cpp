@@ -83,11 +83,12 @@ namespace myGUI
     bool myGUI::MyButton::isMouseOnZone(const cocos2d::Point& cursorPos, float zoneOffset)
     {
         const auto boundBox = getBoundingBox();
+        const auto localCursorPos = _parent->convertToNodeSpace(cursorPos);
 
         const Rect r{ boundBox.origin.x - zoneOffset * _scaleX, boundBox.origin.y - zoneOffset * _scaleZ,
                 boundBox.size.width + zoneOffset * 2 * _scaleX, boundBox.size.height + zoneOffset * 2 * _scaleY };
 
-        return r.containsPoint({ cursorPos.x, cursorPos.y });
+        return r.containsPoint({ localCursorPos.x, localCursorPos.y });
     }
 
 
